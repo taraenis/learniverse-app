@@ -1,0 +1,46 @@
+{
+  "setup": {
+    "startPracticingSmarter": "Set up your Job Interview Prep to start practicing smarter",
+    "lessThan3Minute": "Less than 3 min",
+    "prepareForInterview": "Prepare for your next job interview with confidence",
+    "pasteJobDescription": "Paste a public job posting link below and we’ll create personalized interview scenarios based on the role, helping you practice, get feedback, and track your progress over time.",
+    "input_label": "Enter a publicly available job link to get started",
+    "input_placeholder": "Paste link here",
+    "textarea_label": "Paste here description text",
+    "textarea_placeholder": "Paste",
+    "generateInterviewScenarios": "Generate Interview Scenarios",
+    "steps": {
+      "step1": {
+        "title": "Paste your job posting link",
+        "description": "We’ll extract key information about the role and company."
+      },
+      "step2": {
+        "title": "Set your focus areas",
+        "description": "Choose what you’d like to practice, soft skills, technical, or tricky questions."
+      },
+      "step3": {
+        "title": "Get your interview scenarios",
+        "description": "We’ll generate realistic practice interviews tailored to the position."
+      },
+      "step4": {
+        "title": "Start your first session",
+        "description": "Run the scenario, get instant feedback, and track your progress."
+      }
+    }
+  },
+  "assessment": {
+    "completed": "Completed",
+    "continue": "Continue",
+    "back": "Back",
+    "submit": "Submit",
+    "shareResults": "Share Results",
+    "yourScore": "Your Score",
+    "youAreAlmostReady": "You are almost ready!",
+    "generalAdviceTitle": "General advice",
+    "generalAdviceText1": "Work on structuring your answers more clearly.",
+    "generalAdviceText2": "Try to provide more specific examples from experience.",
+    "generalAdviceText3": "Improve time management during problem-solving questions.",
+    "generalAdviceText4": "What’s your approach to planning a field marketing event?",
+    "question": "Question"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "setup": {
+    "startPracticingSmarter": "Richten Sie Ihre Vorbereitung auf Vorstellungsgespräche so ein, dass Sie intelligenter üben können.",
+    "lessThan3Minute": "Weniger als 3 Minuten",
+    "prepareForInterview": "Bereiten Sie sich selbstbewusst auf Ihr nächstes Vorstellungsgespräch vor.",
+    "pasteJobDescription": "Fügen Sie unten einen Link zu einer öffentlichen Stellenanzeige ein, und wir erstellen personalisierte Interview-Szenarien, die auf die jeweilige Stelle zugeschnitten sind. So können Sie üben, Feedback erhalten und Ihre Fortschritte im Laufe der Zeit verfolgen.",
+    "input_label": "Geben Sie einen öffentlich verfügbaren Stellenlink ein, um loszulegen.",
+    "input_placeholder": "Link hier einfügen",
+    "textarea_label": "Hier Beschreibungstext einfügen",
+    "textarea_placeholder": "Paste",
+    "generateInterviewScenarios": "Interview-Szenarien generieren",
+    "steps": {
+      "step1": {
+        "title": "Fügen Sie hier den Link zu Ihrer Stellenanzeige ein.",
+        "description": "Wir werden wichtige Informationen über die Stelle und das Unternehmen extrahieren."
+      },
+      "step2": {
+        "title": "Legen Sie Ihre Fokusbereiche fest",
+        "description": "Wählen Sie aus, was Sie üben möchten: Soft Skills, technische Fähigkeiten oder knifflige Fragen."
+      },
+      "step3": {
+        "title": "Holen Sie sich Ihre Interview-Szenarien.",
+        "description": "Wir erstellen realistische Übungsinterviews, die auf die jeweilige Position zugeschnitten sind."
+      },
+      "step4": {
+        "title": "Starten Sie Ihre erste Sitzung",
+        "description": "Führe das Szenario durch, erhalte sofortiges Feedback und verfolge deinen Fortschritt."
+      }
+    }
+  },
+  "assessment": {
+    "completed": "Vollendet",
+    "back": "Zurück",
+    "continue": "Weiter",
+    "submit": "Einreichen",
+    "shareResults": "Ergebnisse teilen",
+    "yourScore": "Ihre Punktzahl",
+    "youAreAlmostReady": "Du bist fast fertig!",
+    "generalAdviceTitle": "Allgemeine Hinweise",
+    "generalAdviceText1": "Arbeiten Sie daran, Ihre Antworten klarer zu strukturieren.",
+    "generalAdviceText2": "Versuchen Sie, konkretere Beispiele aus Ihrer Erfahrung anzuführen.",
+    "generalAdviceText3": "Verbessern Sie Ihr Zeitmanagement bei der Bearbeitung von Problemlösungsfragen.",
+    "generalAdviceText4": "Wie gehen Sie bei der Planung einer Feldmarketing-Veranstaltung vor?",
+    "question": "Frage"
+  }
+}

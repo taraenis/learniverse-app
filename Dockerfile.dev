@@ -1,0 +1,22 @@
+FROM node:20-slim
+
+# Install pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+WORKDIR /app
+
+# Copy dependency files
+COPY pnpm-lock.yaml package.json ./
+
+# Install all dependencies (including devDeps)
+RUN pnpm install
+
+# We don't COPY . . here because we will use volumes in docker-compose
+# This keeps the image lightweight
+
+EXPOSE 5173
+
+# Start Vite with the --host flag so it's accessible outside the container
+CMD ["pnpm", "dev", "--host"]

@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+
+# Testing and Coverage
+coverage/
+.vitest.config.ts
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+thumbs.db
+
+# Documentation
+README.md
+
+# Docker-specific (preventing the files from copying themselves)
+Dockerfile
+Dockerfile.dev
+docker-compose.yaml

@@ -1,0 +1,28 @@
+# Build outputs
+dist/
+build/
+coverage/
+
+# Dependency managers
+node_modules/
+pnpm-lock.yaml
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Static assets (usually already minified or large)
+public/
+src/assets/
+
+# TypeScript/IDE configs
+.vscode/
+.idea/
+tsconfig.json
+tsconfig.*.json
