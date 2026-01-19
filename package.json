@@ -11,6 +11,8 @@
     "format:check": "prettier --check \"src/**/*.{vue,ts,js,json,css,scss}\"",
     "format:fix": "prettier --write \"src/**/*.{vue,ts,js,json,css,scss}\"",
     "test": "vitest",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
