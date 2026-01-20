@@ -23,7 +23,7 @@ For a one-command developer setup, use the provided shell script. It will:
 
 ```bash
 chmod +x setup.sh
-./setup.sh
+./dev-setup.sh
 ```
 
 ---
