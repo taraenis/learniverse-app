@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-export const useSetupStore = defineStore('setup', () => {
+export const useSetupStore = defineStore('setupStore', () => {
   const jobLink = ref<string>('');
   const isGenerating = ref<boolean>(false);
 

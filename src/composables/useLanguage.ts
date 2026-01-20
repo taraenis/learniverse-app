@@ -18,7 +18,7 @@ export function useLanguage(): LanguageComposable {
   const setLanguage = async (lang: Language): Promise<void> => {
     if (SUPPORTED_LANGS.includes(lang)) {
       currentLang.value = lang;
-      await setLocale(lang); 
+      await setLocale(lang);
       localStorage.setItem('user-lang', lang);
       document.documentElement.setAttribute('lang', lang);
     }

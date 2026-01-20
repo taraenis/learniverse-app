@@ -30,7 +30,7 @@
   },
   "assessment": {
     "completed": "Vollendet",
-    "back": "Zurück",
+    "previous": "Zurück",
     "continue": "Weiter",
     "submit": "Einreichen",
     "shareResults": "Ergebnisse teilen",

@@ -13,7 +13,7 @@
       </ul>
     </div>
     <div>
-      <CustomButton @onClick="$emit('onClick')" :text="buttonText" />
+      <CustomButton @onClick="$emit('onClick')" :text="buttonText" symbol="↗" />
     </div>
   </div>
 </template>

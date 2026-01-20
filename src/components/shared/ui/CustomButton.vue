@@ -1,10 +1,13 @@
 <template>
-  <button class="custom-btn" :disabled="disabled" @click="$emit('onClick')">{{ text }} ↗</button>
+  <button class="custom-btn" :disabled="disabled" @click="$emit('onClick')">
+    {{ text }} {{ symbol }}
+  </button>
 </template>
 
 <script setup lang="ts">
 interface Props {
   disabled?: boolean;
+  symbol: string;
   text: string;
 }
 
@@ -14,7 +17,6 @@ defineEmits(['onClick']);
 
 <style scoped lang="scss">
 .custom-btn {
-  margin-top: 0.75rem;
   padding: 0.75rem 1.375rem;
   font-size: 0.875rem;
   font-weight: 500;

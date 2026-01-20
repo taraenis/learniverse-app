@@ -3,7 +3,7 @@ import { ref, computed, reactive } from 'vue';
 import { type Question } from '@/models/question';
 import mockQuestions from '@/data/mock-questions';
 
-export const useAssessmentStore = defineStore('assessment', () => {
+export const useAssessmentStore = defineStore('assessmentStore', () => {
   const currentIndex = ref(0);
   const questions = ref<Question[]>(mockQuestions as Question[]);
   const answers = reactive<Record<number, string>>({});
@@ -22,6 +22,16 @@ export const useAssessmentStore = defineStore('assessment', () => {
     if (!activeQuestion) return false;
     return Boolean(answers[activeQuestion.id]);
   });
+
+  function prev() {
+    if (currentIndex.value > 0) {
+      if (isFinished.value) {
+        isFinished.value = false;
+      } else {
+        currentIndex.value--;
+      }
+    }
+  }
 
   function next() {
     if (currentIndex.value < questions.value.length - 1) {
@@ -58,6 +68,7 @@ export const useAssessmentStore = defineStore('assessment', () => {
     currentQuestion,
     canContinue,
     setAnswer,
+    prev,
     next,
     reset,
     updateSampleAnswer,

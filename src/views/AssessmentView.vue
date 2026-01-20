@@ -13,20 +13,18 @@
       <AnswerInput v-model="currentAnswer" />
 
       <div class="footer-actions">
-        <div>
-          <CustomButton
-            :text="t('assessment.back')"
-            :disabled="!currentAnswer.trim()"
-            @onClick="onContinue"
-          />
-        </div>
-        <div>
-          <CustomButton
-            :text="continueButtonText"
-            :disabled="!currentAnswer.trim()"
-            @onClick="onContinue"
-          />
-        </div>
+        <CustomButton
+          symbol="↖"
+          :text="t('assessment.previous')"
+          :disabled="store.currentIndex === 0"
+          @onClick="onPrevious"
+        />
+        <CustomButton
+          symbol="↗"
+          :text="continueButtonText"
+          :disabled="!currentAnswer.trim()"
+          @onClick="onContinue"
+        />
       </div>
     </template>
 
@@ -48,8 +46,8 @@ import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const store = useAssessmentStore();
-const currentQuestion = store.currentQuestion?.id ?? 0;
-const currentAnswer = ref(store.answers[currentQuestion] ?? '');
+const currentQuestionId = store.currentQuestion?.id ?? 0;
+const currentAnswer = ref(store.answers[currentQuestionId] ?? '');
 
 const continueButtonText = computed(() => {
   const isLastQuestion = store.currentIndex === store.questions.length - 1;
@@ -75,10 +73,18 @@ watch(currentAnswer, (newValue) => {
 });
 
 const onContinue = () => {
-  if (!store.currentQuestion) {
+  if (!store.currentQuestion || !currentAnswer.value) {
     return;
   }
-  store.setAnswer(store.currentQuestion.id, currentAnswer.value);
+
+  store.setAnswer(currentQuestionId, currentAnswer.value);
+
+  currentAnswer.value = store.answers[currentQuestionId] ?? '';
+};
+
+const onPrevious = () => {
+  store.prev();
+  currentAnswer.value = store.answers[currentQuestionId] ?? '';
 };
 
 const onReset = () => store.reset();
@@ -114,7 +120,9 @@ const onReset = () => store.reset();
   .footer-actions {
     max-width: 45rem;
     width: 100%;
-    text-align: right;
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
   }
 }
 </style>
