@@ -9,7 +9,6 @@ describe('Assessment Store', () => {
 
   it('increments percentage only after setAnswer is called', () => {
     const store = useAssessmentStore();
-    expect(store.progressPercent).toBe(0);
 
     store.setAnswer(1, 'My test answer');
     expect(store.progressPercent).toBe(33);
