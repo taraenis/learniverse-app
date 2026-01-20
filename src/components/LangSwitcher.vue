@@ -19,6 +19,7 @@ const { currentLang, setLanguage } = useLanguage();
 .lang-switcher {
   display: flex;
   justify-content: right;
+  background-color: #fff;
 
   button {
     cursor: pointer;

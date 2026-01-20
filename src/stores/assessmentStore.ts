@@ -10,9 +10,8 @@ export const useAssessmentStore = defineStore('assessmentStore', () => {
   const isFinished = ref(false);
 
   const progressPercent = computed(() => {
-    const answeredCount = Object.keys(answers).length;
     const total = questions.value.length;
-    return total > 0 ? Math.round((answeredCount / total) * 100) : 0;
+    return total > 0 ? Math.round(((currentIndex.value + 1) / total) * 100) : 0;
   });
 
   const currentQuestion = computed(() => questions.value[currentIndex.value]);
@@ -43,7 +42,6 @@ export const useAssessmentStore = defineStore('assessmentStore', () => {
 
   function setAnswer(questionId: number, value: string) {
     answers[questionId] = value;
-    next();
   }
 
   function reset() {

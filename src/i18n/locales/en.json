@@ -41,6 +41,18 @@
     "generalAdviceText2": "Try to provide more specific examples from experience.",
     "generalAdviceText3": "Improve time management during problem-solving questions.",
     "generalAdviceText4": "What’s your approach to planning a field marketing event?",
-    "question": "Question"
+    "question": "Question",
+    "jobLinkInvalidURL": "We couldn’t retrieve the data from the link you shared. Could you please copy and paste the job description text instead?",
+    "questions": {
+      "question1": "Tell me about yourself and your experience in field marketing",
+      "question2": "How do you measure the success of a field marketing campaign?",
+      "question3": "What’s your approach to planning a field marketing event?"
+    },
+    "answers": {
+      "answer1": "I’ve worked in field marketing for 5 years, managing local campaigns, brand activations, and events that connect directly with customers. I enjoy the mix of creativity and logistics, from planning and vendor coordination to engaging with audiences in person. My focus is on creating experiences that drive measurable leads and strengthen brand loyalty.",
+      "answer2": "Success depends on the campaign’s goal. For awareness campaigns, I track engagement, attendance, and social mentions. For lead generation, I look at lead volume, quality, and conversion rate. I also compare post-event sales data and customer feedback to measure overall impact.",
+      "answer3": "I start by defining the objective and target audience. Then I build a plan around location, timing, partnerships, and messaging. I coordinate closely with sales to ensure our field goals align with pipeline targets. Finally, I prepare detailed timelines, vendor checklists, and a feedback plan for post-event analysis."
+    },
+    "typeYourAnswer": "Type your answer here.."
   }
 }

@@ -10,11 +10,10 @@
         :sampleAnswer="store.currentQuestion.sampleAnswer"
       />
 
-      <AnswerInput v-model="currentAnswer" />
-
       <div class="footer-actions">
         <CustomButton
           symbol="↖"
+          symbolPosition="before"
           :text="t('assessment.previous')"
           :disabled="store.currentIndex === 0"
           @onClick="onPrevious"
@@ -39,16 +38,16 @@ import { computed, ref, watch } from 'vue';
 import { useAssessmentStore } from '@/stores/assessmentStore';
 import CustomButton from '@/components/shared/ui/CustomButton.vue';
 import QuestionCard from '@/components/assessment/QuestionCard.vue';
-import AnswerInput from '@/components/assessment/AnswerInput.vue';
 import ProgressBar from '@/components/assessment/ProgressBar.vue';
 import ScoreSummary from '@/components/assessment/ScoreSummary.vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const store = useAssessmentStore();
-const currentQuestionId = store.currentQuestion?.id ?? 0;
-const currentAnswer = ref(store.answers[currentQuestionId] ?? '');
 
+const currentAnswer = ref('');
+
+const currentQuestionId = computed(() => store.currentQuestion?.id);
 const continueButtonText = computed(() => {
   const isLastQuestion = store.currentIndex === store.questions.length - 1;
   return isLastQuestion ? t('assessment.submit') : t('assessment.continue');
@@ -56,35 +55,32 @@ const continueButtonText = computed(() => {
 
 watch(
   () => store.currentIndex,
-  (newIndex) => {
-    const currentQuestion = store.questions[newIndex];
-    if (!currentQuestion) {
-      return;
-    }
-    currentAnswer.value = store.answers[currentQuestion.id] ?? currentQuestion.sampleAnswer;
+  () => {
+    const id = currentQuestionId.value;
+    if (!id) return;
+    currentAnswer.value = store.answers[id] ?? store.currentQuestion?.sampleAnswer ?? '';
   },
   { immediate: true },
 );
 
-watch(currentAnswer, (newValue) => {
-  if (store.currentQuestion) {
-    store.updateSampleAnswer(store.currentQuestion.id, newValue);
-  }
+watch(currentAnswer, (value) => {
+  const id = currentQuestionId.value;
+  if (!id) return;
+  store.updateSampleAnswer(id, value);
 });
 
 const onContinue = () => {
-  if (!store.currentQuestion || !currentAnswer.value) {
-    return;
-  }
-
-  store.setAnswer(currentQuestionId, currentAnswer.value);
-
-  currentAnswer.value = store.answers[currentQuestionId] ?? '';
+  const id = currentQuestionId.value;
+  if (!id || !currentAnswer.value.trim()) return;
+  store.setAnswer(id, currentAnswer.value);
+  store.next();
 };
 
 const onPrevious = () => {
   store.prev();
-  currentAnswer.value = store.answers[currentQuestionId] ?? '';
+  const id = currentQuestionId.value;
+  if (!id) return;
+  currentAnswer.value = store.answers[id] ?? '';
 };
 
 const onReset = () => store.reset();

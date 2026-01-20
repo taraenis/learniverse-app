@@ -1,8 +1,8 @@
 <template>
   <section class="question">
     <h1>{{ t('assessment.question') }} {{ index + 1 }}:</h1>
-    <h1 class="question__text">{{ text }}</h1>
-    <p class="question__sample-answer">{{ sampleAnswer }}</p>
+    <h1 class="question__text">{{ t(`assessment.questions.question${index + 1}`) }}</h1>
+    <p class="question__sample-answer">{{ t(`assessment.answers.answer${index + 1}`) }}</p>
   </section>
 </template>
 

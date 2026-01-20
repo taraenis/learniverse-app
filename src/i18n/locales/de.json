@@ -41,6 +41,18 @@
     "generalAdviceText2": "Versuchen Sie, konkretere Beispiele aus Ihrer Erfahrung anzuführen.",
     "generalAdviceText3": "Verbessern Sie Ihr Zeitmanagement bei der Bearbeitung von Problemlösungsfragen.",
     "generalAdviceText4": "Wie gehen Sie bei der Planung einer Feldmarketing-Veranstaltung vor?",
-    "question": "Frage"
+    "question": "Frage",
+    "jobLinkInvalidURL": "Wir konnten die Daten über den von Ihnen geteilten Link nicht abrufen. Könnten Sie bitte stattdessen den Text der Stellenbeschreibung kopieren und einfügen?",
+    "questions": {
+      "question1": "Erzählen Sie mir etwas über sich und Ihre Erfahrungen im Außendienstmarketing.",
+      "question2": "Wie misst man den Erfolg einer Field-Marketing-Kampagne?",
+      "question3": "Wie gehen Sie bei der Planung einer Feldmarketing-Veranstaltung vor?"
+    },
+    "answers": {
+      "answer1": "Ich arbeite seit fünf Jahren im Field-Marketing und leite lokale Kampagnen, Markenaktivierungen und Events mit direktem Kundenkontakt. Die Kombination aus Kreativität und Organisation – von der Planung und Koordination von Dienstleistern bis hin zum persönlichen Kundenkontakt – begeistert mich. Mein Fokus liegt darauf, Erlebnisse zu schaffen, die messbare Leads generieren und die Markentreue stärken.",
+      "answer2": "Der Erfolg hängt vom Kampagnenziel ab. Bei Awareness-Kampagnen analysiere ich Engagement, Teilnehmerzahlen und Erwähnungen in sozialen Medien. Bei der Leadgenerierung betrachte ich Leadvolumen, -qualität und Konversionsrate. Zusätzlich vergleiche ich die Verkaufszahlen nach der Veranstaltung und das Kundenfeedback, um die Gesamtwirkung zu messen.",
+      "answer3": "Ich beginne mit der Definition von Ziel und Zielgruppe. Anschließend erstelle ich einen Plan, der Ort, Zeitpunkt, Partnerschaften und die Kernbotschaften umfasst. In enger Abstimmung mit dem Vertrieb stelle ich sicher, dass unsere Außendienstziele mit den Pipeline-Zielen übereinstimmen. Abschließend erstelle ich detaillierte Zeitpläne, Checklisten für Dienstleister und einen Feedbackplan für die Nachbereitung der Veranstaltung."
+    },
+    "typeYourAnswer": "Geben Sie hier Ihre Antwort ein.."
   }
 }

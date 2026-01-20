@@ -3,17 +3,25 @@
     <h1>{{ t('setup.prepareForInterview') }}</h1>
     <h2>{{ t('setup.pasteJobDescription') }}</h2>
 
-    <form>
+    <form @submit.prevent="onGenerate">
+      <div v-if="errorMessage" class="error">
+        <div class="error-message">
+          {{ t('assessment.jobLinkInvalidURL') }}
+        </div>
+      </div>
+
       <label for="job-link-input-label">{{ t('setup.input_label') }}</label>
+
       <input
         id="job-link-input-label"
         class="job-link-input"
         type="text"
-        v-model="jobLink"
+        v-model="jobLinkURL"
         :placeholder="t('setup.input_placeholder')"
       />
+
       <div>
-        <button @click="onGenerate" class="generate-btn" :disabled="!jobLink">
+        <button type="submit" class="generate-btn" :disabled="!jobLinkURL || !!errorMessage">
           {{ t('setup.generateInterviewScenarios') }}
         </button>
       </div>
@@ -22,15 +30,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const emit = defineEmits(['onGenerateInterviewScenarios']);
-const jobLink = ref<string>('');
+
+const jobLinkURL = ref<string>('');
+const errorMessage = ref<string>('');
+
+watch(jobLinkURL, (newValue) => {
+  if (!newValue) {
+    errorMessage.value = '';
+    return;
+  }
+
+  try {
+    new URL(newValue);
+    errorMessage.value = '';
+  } catch {
+    errorMessage.value = t('assessment.jobLinkInvalidURL');
+  }
+});
 
 const onGenerate = () => {
-  emit('onGenerateInterviewScenarios', jobLink.value);
+  if (!errorMessage.value) {
+    emit('onGenerateInterviewScenarios', jobLinkURL.value);
+  }
 };
 </script>
 
@@ -57,8 +83,20 @@ const onGenerate = () => {
     margin-top: 2rem;
     gap: 0.5rem;
 
+    .error {
+      .error-message {
+        background: #fef3f2;
+        border: 1px solid #fecdca;
+        border-radius: 9999px;
+        color: #d92d20;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        display: inline-block;
+      }
+    }
+
     label {
-      font-weight: 500;
+      font-weight: 600;
       color: #3d4350;
     }
 

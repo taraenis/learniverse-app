@@ -1,6 +1,8 @@
 <template>
   <button class="custom-btn" :disabled="disabled" @click="$emit('onClick')">
-    {{ text }} {{ symbol }}
+    <span v-if="symbolPosition === 'before'">{{ symbol }}</span>
+    {{ text }}
+    <span v-if="symbolPosition === 'after'">{{ symbol }}</span>
   </button>
 </template>
 
@@ -8,10 +10,15 @@
 interface Props {
   disabled?: boolean;
   symbol: string;
+  symbolPosition?: 'before' | 'after';
   text: string;
 }
 
-defineProps<Props>();
+withDefaults(defineProps<Props>(), {
+  symbolPosition: 'after',
+  disabled: false,
+});
+
 defineEmits(['onClick']);
 </script>
 
