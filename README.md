@@ -22,8 +22,8 @@ For a one-command developer setup, use the provided shell script. It will:
 * Initialize git hooks (Husky) if configured
 
 ```bash
-chmod +x setup.sh
-./dev-setup.sh
+chmod +x ./scripts/dev-setup.sh
+./scripts/dev-setup.sh
 ```
 
 ---
