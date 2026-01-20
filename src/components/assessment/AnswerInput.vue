@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 interface Props {
-  modelValue: string;
+  modelValue: boolean;
 }
 
 defineProps<Props>();
