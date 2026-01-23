@@ -35,12 +35,13 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { router } from '@/router';
 import { useAssessmentStore } from '@/stores/assessmentStore';
 import CustomButton from '@/components/shared/ui/CustomButton.vue';
 import QuestionCard from '@/components/assessment/QuestionCard.vue';
 import ProgressBar from '@/components/assessment/ProgressBar.vue';
 import ScoreSummary from '@/components/assessment/ScoreSummary.vue';
-import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const store = useAssessmentStore();
@@ -83,7 +84,12 @@ const onPrevious = () => {
   currentAnswer.value = store.answers[id] ?? '';
 };
 
-const onReset = () => store.reset();
+const onReset = () => {
+  store.reset();
+  router.push({
+    path: '/',
+  });
+};
 </script>
 
 <style scoped lang="scss">
