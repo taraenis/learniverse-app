@@ -11,10 +11,6 @@ const dirname =
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   plugins: [vue()],
-
-  optimizeDeps: {
-    include: ['axe-core', '@storybook/addon-interactions', '@storybook/test'],
-  },
   test: {
     globals: true,
     include: ['tests/**/*.spec.{ts,js}', 'src/**/*.spec.{ts,js}'],
@@ -51,6 +47,9 @@ export default defineConfig({
             headless: true,
             provider: playwright({}),
             instances: [{ browser: 'chromium' }],
+            optimizeDeps: {
+              include: ['axe-core', '@storybook/addon-interactions', '@storybook/test'],
+            },
           },
           setupFiles: ['.storybook/vitest.setup.ts'],
         },
