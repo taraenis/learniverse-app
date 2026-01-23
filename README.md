@@ -25,8 +25,6 @@ chmod +x ./scripts/dev-setup.sh
 
 ### Manual Setup
 
-If you prefer to set things up manually:
-
 ```bash
 pnpm install
 ```
