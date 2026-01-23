@@ -3,14 +3,23 @@ import { defineConfig } from 'vitest/config';
 import { fileURLToPath } from 'node:url';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
+import vue from '@vitejs/plugin-vue';
+
 const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
+  plugins: [vue()],
+
+  optimizeDeps: {
+    include: ['axe-core', '@storybook/addon-interactions', '@storybook/test'],
+  },
   test: {
     globals: true,
-    reporters: ['default'],
+    include: ['tests/**/*.spec.{ts,js}', 'src/**/*.spec.{ts,js}'],
+    exclude: ['**/node_modules/**'],
+    environment: 'jsdom',
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'json-summary', 'html'],
@@ -25,25 +34,23 @@ export default defineConfig({
     },
     projects: [
       {
+        name: 'unit',
+        extends: true,
+      },
+      {
+        name: 'storybook',
         extends: true,
         plugins: [
-          // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
           storybookTest({
             configDir: path.join(dirname, '.storybook'),
           }),
         ],
         test: {
-          name: 'storybook',
           browser: {
             enabled: true,
             headless: true,
             provider: playwright({}),
-            instances: [
-              {
-                browser: 'chromium',
-              },
-            ],
+            instances: [{ browser: 'chromium' }],
           },
           setupFiles: ['.storybook/vitest.setup.ts'],
         },
@@ -52,7 +59,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(dirname, './src'),
     },
   },
 });

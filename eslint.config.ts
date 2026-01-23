@@ -6,14 +6,12 @@ import vueTsEslintConfig from '@vue/eslint-config-typescript';
 import prettierConfig from '@vue/eslint-config-prettier';
 
 export default [
-  {
-    ignores: ['dist/**', 'node_modules/**', 'public/**'],
-  },
+  { ignores: ['**/dist/**', '**/node_modules/**', '**/public/**', '**/storybook-static/**'] },
   ...pluginVue.configs['flat/essential'],
   ...vueTsEslintConfig(),
   prettierConfig,
   {
-    files: ['**/*.vue', '**/*.ts'],
+    files: ['**/*.vue', '**/*.ts', '**/*.js', '**/*.tsx', '**/*.jsx'],
     rules: {
       'prettier/prettier': 'error',
       'vue/multi-word-component-names': 'off',
