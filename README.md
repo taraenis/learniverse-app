@@ -82,5 +82,5 @@ http://localhost
 
 ### Notes
 
-* Ensure `.env` or `.env.local` files are present if required by the application. Please note there is a `.env.example`
+* Ensure `.env`, `.env.local`, `.env.development` and `.env.production` files are present if required by the application. Please note there is a `.env.example`
 * The setup script is safe to re-run and will skip already completed steps.
