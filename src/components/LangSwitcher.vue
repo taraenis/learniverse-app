@@ -15,7 +15,7 @@ import { useLanguage } from '@/composables/useLanguage';
 const { currentLang, setLanguage } = useLanguage();
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .lang-switcher {
   display: flex;
   justify-content: right;

@@ -21,10 +21,10 @@ const onGenerateInterviewScenarios = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use '@/assets/styles/vars.scss' as *;
 .setup-page {
   display: flex;
-  height: 100vh;
   color: #000000;
   background-color: #ffffff;
 
@@ -36,6 +36,37 @@ const onGenerateInterviewScenarios = () => {
   .content-area {
     flex: 1;
     padding: 60px;
+  }
+
+  @media (max-width: $tablet) {
+    .sidebar-width {
+      width: 100%;
+      min-width: 220px;
+    }
+
+    .content-area {
+      padding: 40px;
+    }
+  }
+
+  @media (max-width: $mobile) {
+    flex-direction: column;
+
+    .sidebar-width {
+      width: 100%;
+      min-width: unset;
+      max-width: none;
+    }
+
+    .content-area {
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: $small-mobile) {
+    .content-area {
+      padding: 16px;
+    }
   }
 }
 </style>
