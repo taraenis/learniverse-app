@@ -69,6 +69,10 @@ Build and start the development container
 ```bash
 docker-compose -f docker-compose.yaml up --build
 ```
+Open the browser
+```bash
+http://localhost:5173
+```
 Build the production image
 ```bash
 docker build -f Dockerfile -t learniverse-app:prod .
