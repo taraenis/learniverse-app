@@ -1,16 +1,17 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from 'eslint-plugin-storybook';
+
 import pluginVue from 'eslint-plugin-vue';
 import vueTsEslintConfig from '@vue/eslint-config-typescript';
 import prettierConfig from '@vue/eslint-config-prettier';
 
 export default [
-  {
-    ignores: ['dist/**', 'node_modules/**', 'public/**'],
-  },
+  { ignores: ['**/dist/**', '**/node_modules/**', '**/public/**', '**/storybook-static/**'] },
   ...pluginVue.configs['flat/essential'],
   ...vueTsEslintConfig(),
   prettierConfig,
   {
-    files: ['**/*.vue', '**/*.ts'],
+    files: ['**/*.vue', '**/*.ts', '**/*.js', '**/*.tsx', '**/*.jsx'],
     rules: {
       'prettier/prettier': 'error',
       'vue/multi-word-component-names': 'off',
@@ -18,4 +19,5 @@ export default [
       'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     },
   },
+  ...storybook.configs['flat/recommended'],
 ];

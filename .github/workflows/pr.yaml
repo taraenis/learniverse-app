@@ -5,24 +5,17 @@ env:
 
 on:
   pull_request:
-    branches:
-      - master
+    branches: [master]
   workflow_dispatch:
 
 jobs:
-  build:
-    name: Build and Test
+  verify:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.head.repo.full_name == github.repository
-    
     steps:
-      - name: Check PR code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -33,77 +26,52 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build
-        run: pnpm run build
-    
+      - name: Check Formatting
+        run: pnpm run format:check
+
+      - name: Lint
+        run: pnpm run lint
+
   test:
-    name: Test ${{ matrix.artifact }}
-    needs: build
+    needs: verify
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - branch: master
-            artifact: master
-          - branch: ${{ github.head_ref }}
-            artifact: pull-request
-    
     steps:
-      - name: Checkout ${{ matrix.branch }}
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ matrix.branch }}
-
+      - uses: actions/checkout@v4
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.node_version }}
           cache: 'pnpm'
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Run tests with coverage
-        run: pnpm exec vitest run --coverage.enabled --coverage.reporter=json --coverage.reporter=json-summary --coverage.reporter=lcov
-
-      - name: Upload coverage artifact
-        uses: actions/upload-artifact@v4
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(pnpm list playwright --depth=0 | grep playwright | awk '{print $2}')" >> $GITHUB_OUTPUT
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v4
         with:
-          name: coverage-${{ matrix.artifact }}
-          path: coverage/
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ steps.playwright-version.outputs.version }}
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run tests with coverage
+        run: pnpm exec vitest run --coverage.enabled
 
-  report-coverage:
-    name: Report coverage comparison
+  build:
     needs: test
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
     steps:
-      - name: Download PR coverage
-        uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          name: coverage-pull-request
-          path: pr-coverage
-
-      - name: Download master coverage
-        continue-on-error: true
-        uses: actions/download-artifact@v4
-        with:
-          name: coverage-master
-          path: master-coverage
-
-      - name: Report coverage
-        if: always()
-        uses: davelosert/vitest-coverage-report-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          json-summary-path: pr-coverage/coverage-summary.json
-          json-summary-compare-path: master-coverage/coverage-summary.json
-          json-final-path: pr-coverage/coverage-final.json
-          comment-on: pr
+          node-version: ${{ env.node_version }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm run build
