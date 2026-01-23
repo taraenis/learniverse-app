@@ -38,21 +38,31 @@ pnpm install
 
 ---
 
-### Run the Development Server
+### Run dev
 
 ```bash
 pnpm dev
 ```
 
-> If `pnpm dev` is not available, you can also run:
->
-> ```bash
-> vite
-> ```
+---
+
+### Run project
+
+```bash
+pnpm test
+```
+
+---
+
+### Test project
+
+```bash
+pnpm build
+```
 
 ---
 
 ### Notes
 
-* Ensure `.env` or `.env.local` files are present if required by the application.
+* Ensure `.env` or `.env.local` files are present if required by the application. Please note there is a .env.example
 * The setup script is safe to re-run and will skip already completed steps.
