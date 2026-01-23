@@ -2,8 +2,9 @@
 
 ### Prerequisites
 
-* **Node.js** (v18 or newer recommended)
+* **Node.js** (v20 or newer recommended)
 * **pnpm** (recommended package manager)
+* **Docker** (for containerized development or production)
 
 Install pnpm if you do not already have it:
 
@@ -58,6 +59,27 @@ pnpm test
 
 ```bash
 pnpm build
+```
+
+---
+
+### Docker
+
+Build and start the development container
+```bash
+docker-compose -f docker-compose.yaml up --build
+```
+Build the production image
+```bash
+docker build -f Dockerfile -t learniverse-app:prod .
+```
+Run the production container
+```bash
+docker run -d -p 80:80 learniverse-app:prod
+```
+Open the browser
+```bash
+http://localhost
 ```
 
 ---
