@@ -101,12 +101,12 @@ const onGenerate = () => {
     }
 
     .job-link-input {
-      width: 31.875rem;
       height: 3rem;
       border: 1px solid #a3a9b6;
       border-radius: 1rem;
       padding: 0 1rem;
       font-size: 0.875rem;
+      margin-right: 6rem;
     }
 
     .generate-btn {
