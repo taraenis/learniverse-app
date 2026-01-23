@@ -16,12 +16,6 @@ npm install -g pnpm
 
 ### Quick Setup (Recommended)
 
-For a one-command developer setup, use the provided shell script. It will:
-
-* Verify Node.js and pnpm availability
-* Install project dependencies
-* Initialize git hooks (Husky) if configured
-
 ```bash
 chmod +x ./scripts/dev-setup.sh
 ./scripts/dev-setup.sh
@@ -29,7 +23,7 @@ chmod +x ./scripts/dev-setup.sh
 
 ---
 
-### Manual Setup (Alternative)
+### Manual Setup
 
 If you prefer to set things up manually:
 
