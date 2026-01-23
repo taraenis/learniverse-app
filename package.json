@@ -22,12 +22,8 @@
     "pnpm": ">=10.28.0"
   },
   "lint-staged": {
-    "*.{ts,vue}": [
-      "eslint --fix"
-    ],
-    "*.{css,scss}": [
-      "stylelint --fix"
-    ]
+    "*.{vue,js,jsx,cjs,mjs,ts,tsx}": "eslint --fix",
+    "*.{vue,ts,js,json,css,scss}": "prettier --write"
   },
   "dependencies": {
     "pinia": "^3.0.4",
