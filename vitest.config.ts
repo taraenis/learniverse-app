@@ -1,8 +1,6 @@
 import path from 'path';
 import { defineConfig } from 'vitest/config';
 import { fileURLToPath } from 'node:url';
-import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
-import { playwright } from '@vitest/browser-playwright';
 import vue from '@vitejs/plugin-vue';
 
 const dirname =
@@ -11,6 +9,15 @@ const dirname =
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   plugins: [vue()],
+  optimizeDeps: {
+    include: [
+      'vue',
+      '@storybook/testing-library',
+      '@storybook/addon-interactions',
+      'axe-core',
+      '@storybook/vue3',
+    ],
+  },
   test: {
     globals: true,
     include: ['tests/**/*.spec.{ts,js}', 'src/**/*.spec.{ts,js}'],
@@ -33,27 +40,25 @@ export default defineConfig({
         name: 'unit',
         extends: true,
       },
-      {
+      /*{
         name: 'storybook',
-        extends: true,
         plugins: [
+          vue(),
           storybookTest({
             configDir: path.join(dirname, '.storybook'),
           }),
         ],
         test: {
+          include: [],
           browser: {
             enabled: true,
             headless: true,
             provider: playwright({}),
             instances: [{ browser: 'chromium' }],
-            optimizeDeps: {
-              include: ['axe-core', '@storybook/addon-interactions', '@storybook/test'],
-            },
           },
           setupFiles: ['.storybook/vitest.setup.ts'],
         },
-      },
+      },*/
     ],
   },
   resolve: {

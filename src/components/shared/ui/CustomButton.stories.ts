@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
-import { fn } from 'storybook/test';
+import { expect, fn, userEvent, within } from 'storybook/test';
 import CustomButton from './CustomButton.vue';
 
 const meta = {
@@ -31,6 +31,15 @@ export const Primary: Story = {
     disabled: false,
     symbol: '↗',
     symbolPosition: 'after',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const button = canvas.getByRole('button');
+    await userEvent.click(button);
+
+    expect(button).toBeEnabled();
+    expect(button).toHaveTextContent('Continue');
   },
 };
 
