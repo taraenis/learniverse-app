@@ -46,6 +46,14 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(pnpm list playwright --depth=0 | grep playwright | awk '{print $2}')" >> $GITHUB_OUTPUT
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ steps.playwright-version.outputs.version }}
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps chromium
       - name: Run tests with coverage
