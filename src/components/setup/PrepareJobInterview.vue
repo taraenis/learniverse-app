@@ -1,19 +1,34 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+import { usePrepareJobInterview } from '@/composables/usePrepareJobInterview';
+
+const { t } = useI18n();
+const emit = defineEmits<{
+  (e: 'onGenerateInterviewScenarios', url: string): void;
+}>();
+
+const { jobLinkURL, errorMessage, onGenerate } = usePrepareJobInterview();
+
+const handleSubmit = () => {
+  if (onGenerate()) {
+    emit('onGenerateInterviewScenarios', jobLinkURL.value);
+  }
+};
+</script>
+
 <template>
   <div class="prepare-interview-container">
     <h1>{{ t('setup.prepareForInterview') }}</h1>
     <h2>{{ t('setup.pasteJobDescription') }}</h2>
 
-    <form @submit.prevent="onGenerate">
+    <form @submit.prevent="handleSubmit">
       <div v-if="errorMessage" class="error">
-        <div class="error-message">
-          {{ t('assessment.jobLinkInvalidURL') }}
-        </div>
+        <div class="error-message">{{ errorMessage }}</div>
       </div>
 
-      <label for="job-link-input-label">{{ t('setup.input_label') }}</label>
-
+      <label for="job-link-input">{{ t('setup.input_label') }}</label>
       <input
-        id="job-link-input-label"
+        id="job-link-input"
         class="job-link-input"
         type="text"
         v-model="jobLinkURL"
@@ -28,37 +43,6 @@
     </form>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-
-const { t } = useI18n();
-const emit = defineEmits(['onGenerateInterviewScenarios']);
-
-const jobLinkURL = ref<string>('');
-const errorMessage = ref<string>('');
-
-watch(jobLinkURL, (newValue) => {
-  if (!newValue) {
-    errorMessage.value = '';
-    return;
-  }
-
-  try {
-    new URL(newValue);
-    errorMessage.value = '';
-  } catch {
-    errorMessage.value = t('assessment.jobLinkInvalidURL');
-  }
-});
-
-const onGenerate = () => {
-  if (!errorMessage.value) {
-    emit('onGenerateInterviewScenarios', jobLinkURL.value);
-  }
-};
-</script>
 
 <style scoped lang="scss">
 .prepare-interview-container {
@@ -106,7 +90,7 @@ const onGenerate = () => {
       border-radius: 1rem;
       padding: 0 1rem;
       font-size: 0.875rem;
-      margin-right: 6rem;
+      width: 50%;
     }
 
     .generate-btn {

@@ -1,38 +1,33 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useAssessmentFlow } from './useAssessmentFlow';
 import { router } from '@/router';
-import { useAssessmentStore } from '@/stores/assessmentStore';
+import { useSetupStore } from '@/stores/setup.store';
+import { useAssessmentStore } from '@/stores/assessment.store';
 
-export function useAssessmentNavigation(currentAnswer: { value: string }) {
+export function useAssessmentNavigation() {
   const { t } = useI18n();
-  const store = useAssessmentStore();
+  const setupStore = useSetupStore();
+  const assesmentStore = useAssessmentStore();
+  const flow = useAssessmentFlow();
 
   const continueButtonText = computed(() => {
-    const isLast = store.currentIndex === store.questions.length - 1;
-    return isLast ? t('assessment.submit') : t('assessment.continue');
+    return flow.isLast.value ? t('assessment.submit') : t('assessment.continue');
   });
 
   const onContinue = () => {
-    const id = store.currentQuestion?.id;
-    if (!id || !currentAnswer.value.trim()) return;
-
-    store.setAnswer(id, currentAnswer.value);
-    store.next();
+    if (flow.canContinue.value) {
+      flow.next();
+    }
   };
 
-  const onPrevious = () => {
-    store.prev();
-  };
+  const onPrevious = () => flow.prev();
 
   const onReset = () => {
-    store.reset();
+    setupStore.reset();
+    assesmentStore.reset();
     router.push({ path: '/' });
   };
 
-  return {
-    continueButtonText,
-    onContinue,
-    onPrevious,
-    onReset,
-  };
+  return { continueButtonText, onContinue, onPrevious, onReset };
 }

@@ -1,13 +1,14 @@
 <template>
   <main class="assessment-page">
-    <template v-if="!assessmentStore.isFinished">
-      <ProgressBar :percent="assessmentStore.progressPercent" />
+    <template v-if="!isFinished">
+      <ProgressBar :percent="progressPercent" />
 
       <QuestionCard
-        v-if="assessmentStore.currentQuestion"
-        :index="assessmentStore.currentIndex"
-        :text="assessmentStore.currentQuestion.text"
-        :sampleAnswer="assessmentStore.currentQuestion.sampleAnswer"
+        v-if="currentQuestion"
+        :index="currentIndex"
+        :text="currentQuestion.text"
+        :sampleAnswer="currentQuestion.sampleAnswer"
+        v-model="currentAnswer"
       />
 
       <div class="footer-actions">
@@ -15,13 +16,13 @@
           symbol="↖"
           symbolPosition="before"
           :text="t('assessment.previous')"
-          :disabled="assessmentStore.currentIndex === 0"
+          :disabled="currentIndex === 0"
           @onClick="onPrevious"
         />
         <CustomButton
           symbol="↗"
           :text="continueButtonText"
-          :disabled="!currentAnswer.trim()"
+          :disabled="!canContinue"
           @onClick="onContinue"
         />
       </div>
@@ -35,19 +36,22 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { useAssessmentStore } from '@/stores/assessmentStore';
-import { useAssessmentQuestion } from '@/composables/useAssessmentQuestion';
+import { useAssessmentStore } from '@/stores/assessment.store';
 import { useAssessmentNavigation } from '@/composables/useAssessmentNavigation';
+import { useAssessmentFlow } from '@/composables/useAssessmentFlow';
+import { useAssessmentQuestion } from '@/composables/useAssessmentQuestion';
 import CustomButton from '@/components/shared/ui/CustomButton.vue';
 import QuestionCard from '@/components/assessment/QuestionCard.vue';
 import ProgressBar from '@/components/assessment/ProgressBar.vue';
 import ScoreSummary from '@/components/assessment/ScoreSummary.vue';
+import { computed } from 'vue';
 
 const { t } = useI18n();
 const assessmentStore = useAssessmentStore();
+const { continueButtonText, onContinue, onPrevious, onReset } = useAssessmentNavigation();
+const { progressPercent, currentQuestion, canContinue, isFinished } = useAssessmentFlow();
 const { currentAnswer } = useAssessmentQuestion();
-const { continueButtonText, onContinue, onPrevious, onReset } =
-  useAssessmentNavigation(currentAnswer);
+const currentIndex = computed(() => assessmentStore.currentIndex);
 </script>
 
 <style scoped lang="scss">
@@ -59,6 +63,9 @@ const { continueButtonText, onContinue, onPrevious, onReset } =
   align-items: center;
   gap: 2.25rem;
   position: relative;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(74, 195, 214, 0.18), rgba(0, 0, 0, 0.85) 60%), #06090c;
+  color: #e6eef0;
 
   &::before {
     content: '';

@@ -23,6 +23,15 @@ const onGenerateInterviewScenarios = () => {
 
 <style scoped lang="scss">
 @use '@/assets/styles/vars.scss' as *;
+
+@mixin job-link-input-style {
+  :deep() {
+    .job-link-input {
+      width: 100% !important;
+    }
+  }
+}
+
 .setup-page {
   display: flex;
   color: #000000;
@@ -31,22 +40,26 @@ const onGenerateInterviewScenarios = () => {
   .sidebar-width {
     width: 30%;
     background-color: #f9f9f9;
+    height: 100%;
   }
 
   .content-area {
     flex: 1;
-    padding: 60px;
+    padding: 100px 60px;
   }
 
   @media (max-width: $tablet) {
     .sidebar-width {
-      width: 100%;
+      width: 50%;
       min-width: 220px;
+      height: auto;
     }
 
     .content-area {
       padding: 40px;
     }
+
+    @include job-link-input-style;
   }
 
   @media (max-width: $mobile) {
@@ -56,14 +69,21 @@ const onGenerateInterviewScenarios = () => {
       width: 100%;
       min-width: unset;
       max-width: none;
+      height: auto;
     }
 
     .content-area {
       padding: 20px;
     }
+
+    @include job-link-input-style;
   }
 
   @media (max-width: $small-mobile) {
+    .sidebar-width {
+      height: auto;
+    }
+
     .content-area {
       padding: 16px;
     }
