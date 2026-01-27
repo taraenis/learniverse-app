@@ -26,32 +26,17 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
+import { STEPS } from '@/data/mock-steps';
 
 interface Step {
   title: string;
   description: string;
 }
 
-const steps: Step[] = [
-  {
-    title: 'setup.steps.step1.title',
-    description: 'setup.steps.step1.description',
-  },
-  {
-    title: 'setup.steps.step2.title',
-    description: 'setup.steps.step2.description',
-  },
-  {
-    title: 'setup.steps.step3.title',
-    description: 'setup.steps.step3.description',
-  },
-  {
-    title: 'setup.steps.step4.title',
-    description: 'setup.steps.step4.description',
-  },
-];
+const { t } = useI18n();
+const steps = ref<readonly Step[]>(STEPS);
 </script>
 
 <style scoped lang="scss">
@@ -61,6 +46,7 @@ const steps: Step[] = [
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    height: 100vh;
 
     h2 {
       font-weight: 400;

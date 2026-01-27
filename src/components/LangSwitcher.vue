@@ -17,8 +17,11 @@ const { currentLang, setLanguage } = useLanguage();
 
 <style scoped lang="scss">
 .lang-switcher {
-  display: flex;
-  justify-content: right;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  z-index: 999999;
+  background-color: rgba(255, 255, 255, 0.6);
 
   button {
     cursor: pointer;
