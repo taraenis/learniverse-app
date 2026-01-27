@@ -90,7 +90,7 @@ const handleSubmit = () => {
       border-radius: 1rem;
       padding: 0 1rem;
       font-size: 0.875rem;
-      margin-right: 6rem;
+      width: 50%;
     }
 
     .generate-btn {

@@ -84,6 +84,20 @@ const steps: Step[] = [
         display: flex;
         align-items: center;
         margin-bottom: 3rem;
+        position: relative;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &:not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 55px;
+          left: 15px;
+          height: 100%;
+          border: 1px dashed;
+        }
 
         .icon-wrapper {
           margin-right: 1rem;
