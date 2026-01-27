@@ -1,13 +1,13 @@
 <template>
   <main class="assessment-page">
-    <template v-if="!store.isFinished">
-      <ProgressBar :percent="store.progressPercent" />
+    <template v-if="!assessmentStore.isFinished">
+      <ProgressBar :percent="assessmentStore.progressPercent" />
 
       <QuestionCard
-        v-if="store.currentQuestion"
-        :index="store.currentIndex"
-        :text="store.currentQuestion.text"
-        :sampleAnswer="store.currentQuestion.sampleAnswer"
+        v-if="assessmentStore.currentQuestion"
+        :index="assessmentStore.currentIndex"
+        :text="assessmentStore.currentQuestion.text"
+        :sampleAnswer="assessmentStore.currentQuestion.sampleAnswer"
       />
 
       <div class="footer-actions">
@@ -15,7 +15,7 @@
           symbol="↖"
           symbolPosition="before"
           :text="t('assessment.previous')"
-          :disabled="store.currentIndex === 0"
+          :disabled="assessmentStore.currentIndex === 0"
           @onClick="onPrevious"
         />
         <CustomButton
@@ -34,62 +34,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { router } from '@/router';
 import { useAssessmentStore } from '@/stores/assessmentStore';
+import { useAssessmentQuestion } from '@/composables/useAssessmentQuestion';
+import { useAssessmentNavigation } from '@/composables/useAssessmentNavigation';
 import CustomButton from '@/components/shared/ui/CustomButton.vue';
 import QuestionCard from '@/components/assessment/QuestionCard.vue';
 import ProgressBar from '@/components/assessment/ProgressBar.vue';
 import ScoreSummary from '@/components/assessment/ScoreSummary.vue';
 
 const { t } = useI18n();
-const store = useAssessmentStore();
-
-const currentAnswer = ref('');
-
-const currentQuestionId = computed(() => store.currentQuestion?.id);
-const continueButtonText = computed(() => {
-  const isLastQuestion = store.currentIndex === store.questions.length - 1;
-  return isLastQuestion ? t('assessment.submit') : t('assessment.continue');
-});
-
-watch(
-  () => store.currentIndex,
-  () => {
-    const id = currentQuestionId.value;
-    if (!id) return;
-    currentAnswer.value = store.answers[id] ?? store.currentQuestion?.sampleAnswer ?? '';
-  },
-  { immediate: true },
-);
-
-watch(currentAnswer, (value) => {
-  const id = currentQuestionId.value;
-  if (!id) return;
-  store.updateSampleAnswer(id, value);
-});
-
-const onContinue = () => {
-  const id = currentQuestionId.value;
-  if (!id || !currentAnswer.value.trim()) return;
-  store.setAnswer(id, currentAnswer.value);
-  store.next();
-};
-
-const onPrevious = () => {
-  store.prev();
-  const id = currentQuestionId.value;
-  if (!id) return;
-  currentAnswer.value = store.answers[id] ?? '';
-};
-
-const onReset = () => {
-  store.reset();
-  router.push({
-    path: '/',
-  });
-};
+const assessmentStore = useAssessmentStore();
+const { currentAnswer } = useAssessmentQuestion();
+const { continueButtonText, onContinue, onPrevious, onReset } =
+  useAssessmentNavigation(currentAnswer);
 </script>
 
 <style scoped lang="scss">
