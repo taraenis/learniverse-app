@@ -5,6 +5,7 @@
 
       <div>
         <span class="time-badge">
+          <font-awesome-icon icon="fa-solid fa-alarm-clock" />
           {{ t('setup.lessThan3Minute') }}
         </span>
       </div>
