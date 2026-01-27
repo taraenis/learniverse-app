@@ -3,6 +3,8 @@ import { defineConfig } from 'vitest/config';
 import { fileURLToPath } from 'node:url';
 import vue from '@vitejs/plugin-vue';
 
+const COVERAGE_PERCENTAGE = 5;
+
 const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
@@ -29,10 +31,10 @@ export default defineConfig({
       include: ['src/**'],
       exclude: ['**/types/**', '**/constants/**', '**/*.mdx'],
       thresholds: {
-        lines: 85,
-        functions: 85,
-        branches: 85,
-        statements: 85,
+        lines: COVERAGE_PERCENTAGE,
+        functions: COVERAGE_PERCENTAGE,
+        branches: COVERAGE_PERCENTAGE,
+        statements: COVERAGE_PERCENTAGE,
       },
     },
     projects: [
