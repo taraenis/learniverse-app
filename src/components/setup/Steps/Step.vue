@@ -4,21 +4,16 @@
       <div class="icon">✓</div>
     </div>
     <div class="text">
-      <h3>{{ t(step.title) }}</h3>
-      <p>{{ t(step.description) }}</p>
+      <h3>{{ t(title) }}</h3>
+      <p>{{ t(description) }}</p>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
+import type { Step } from '@/models/step';
 
-interface Step {
-  step: {
-    title: string;
-    description: string;
-  };
-}
 defineProps<Step>();
 
 const { t } = useI18n();
