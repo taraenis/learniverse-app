@@ -1,10 +1,12 @@
 import { ref, computed, readonly, type DeepReadonly, type ComputedRef } from 'vue';
-import { SUPPORTED_LANGS } from '@/constants';
+import { DEFAULT_LOCALE, SUPPORTED_LANGS } from '@/constants';
 import { setLocale } from '@/i18n';
+import type { Language } from '@/types/language.type';
+import { setLanguageHTMLAttributes } from '@/utils/helpers';
 
-export type Language = (typeof SUPPORTED_LANGS)[number];
-
-const currentLang = ref<Language>((localStorage.getItem('user-lang') as Language) || 'en');
+const currentLang = ref<Language>(
+  (localStorage.getItem('user-lang') as Language) ?? DEFAULT_LOCALE,
+);
 
 interface LanguageComposable {
   currentLang: DeepReadonly<typeof currentLang>;
@@ -16,12 +18,13 @@ interface LanguageComposable {
 
 export function useLanguage(): LanguageComposable {
   const setLanguage = async (lang: Language): Promise<void> => {
-    if (SUPPORTED_LANGS.includes(lang)) {
-      currentLang.value = lang;
-      await setLocale(lang);
-      localStorage.setItem('user-lang', lang);
-      document.documentElement.setAttribute('lang', lang);
+    if (!SUPPORTED_LANGS.includes(lang)) {
+      return;
     }
+
+    await setLocale(lang);
+    currentLang.value = lang;
+    setLanguageHTMLAttributes(lang);
   };
 
   const isGerman = computed(() => currentLang.value === 'de');

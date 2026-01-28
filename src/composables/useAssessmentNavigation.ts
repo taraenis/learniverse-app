@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useAssessmentFlow } from './useAssessmentFlow';
+import { useAssessmentFlow } from '@/composables/useAssessmentFlow';
 import { router } from '@/router';
 import { useSetupStore } from '@/stores/setup.store';
 import { useAssessmentStore } from '@/stores/assessment.store';

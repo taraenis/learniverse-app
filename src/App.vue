@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LangSwitcher from './components/LangSwitcher.vue';
+import LangSwitcher from '@/components/LangSwitcher.vue';
 </script>
 
 <template>
