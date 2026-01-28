@@ -9,10 +9,11 @@ import FontAwesomeIcon from '@/plugins/fontawesome';
 
 async function bootstrap() {
   const app = createApp(App);
+  const pinia = createPinia();
 
+  app.use(pinia);
   app.use(i18n);
   app.use(router);
-  app.use(createPinia());
 
   app.component('font-awesome-icon', FontAwesomeIcon);
 
