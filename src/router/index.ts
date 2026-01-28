@@ -4,8 +4,8 @@ import {
   type NavigationGuardNext,
   type RouteRecordRaw,
 } from 'vue-router';
-import SetupView from '../views/SetupView.vue';
-import AssessmentView from '../views/AssessmentView.vue';
+import SetupView from '@/views/SetupView.vue';
+import AssessmentView from '@/views/AssessmentView.vue';
 import { useSetupStore } from '@/stores/setup.store';
 
 const routes: Array<RouteRecordRaw> = [

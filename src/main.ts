@@ -1,25 +1,25 @@
+import '@/assets/styles/app.scss';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { i18n } from '@/i18n';
 import { router } from '@/router';
-import '@/assets/styles/app.scss';
 import App from '@/App.vue';
-import { useLanguage } from './composables/useLanguage';
-import FontAwesomeIcon from './plugins/fontawesome';
+import { useLanguage } from '@/composables/useLanguage';
+import FontAwesomeIcon from '@/plugins/fontawesome';
 
-const app = createApp(App);
+async function bootstrap() {
+  const app = createApp(App);
 
-const setAppLanguage = () => {
+  app.use(i18n);
+  app.use(router);
+  app.use(createPinia());
+
+  app.component('font-awesome-icon', FontAwesomeIcon);
+
   const { currentLang, setLanguage } = useLanguage();
-  setLanguage(currentLang.value);
-};
+  await setLanguage(currentLang.value);
 
-setAppLanguage();
+  app.mount('#app');
+}
 
-app.use(i18n);
-app.use(router);
-app.use(createPinia());
-
-app.component('font-awesome-icon', FontAwesomeIcon);
-
-app.mount('#app');
+bootstrap();

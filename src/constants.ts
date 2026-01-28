@@ -1,4 +1,3 @@
-import type { SupportedLocales } from '@/i18n';
+import type { SupportedLocales } from '@/types/language.type';
 
 export const DEFAULT_LOCALE: SupportedLocales = 'en';
-export const SUPPORTED_LANGS = ['en', 'de'] as const;

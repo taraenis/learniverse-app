@@ -1,8 +1,7 @@
 import { createI18n } from 'vue-i18n';
 import { nextTick } from 'vue';
 import { DEFAULT_LOCALE } from '@/constants';
-
-export type SupportedLocales = 'en' | 'de';
+import type { SupportedLocales } from '@/types/language.type';
 
 export const i18n = createI18n({
   legacy: false,
@@ -20,9 +19,6 @@ async function loadLocaleMessages(locale: SupportedLocales) {
 
 export async function setLocale(locale: SupportedLocales) {
   await loadLocaleMessages(locale);
-
   i18n.global.locale.value = locale;
-  document.documentElement.lang = locale;
-
   return nextTick();
 }

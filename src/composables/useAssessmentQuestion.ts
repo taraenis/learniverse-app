@@ -1,6 +1,6 @@
 import { ref, watch } from 'vue';
 import { useAssessmentStore } from '@/stores/assessment.store';
-import { useAssessmentFlow } from './useAssessmentFlow';
+import { useAssessmentFlow } from '@/composables/useAssessmentFlow';
 
 export function useAssessmentQuestion() {
   const store = useAssessmentStore();
