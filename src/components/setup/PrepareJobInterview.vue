@@ -110,6 +110,7 @@ const onSubmit = () => {
       font-size: 1rem;
       margin-top: 1rem;
       transition: all 0.3s ease;
+      cursor: pointer;
 
       &:disabled {
         background: #a3a9b6;
