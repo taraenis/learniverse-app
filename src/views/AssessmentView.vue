@@ -65,6 +65,9 @@ const currentIndex = computed(() => assessmentStore.currentIndex);
   position: relative;
   background:
     radial-gradient(circle at 50% 40%, rgba(74, 195, 214, 0.18), rgba(0, 0, 0, 0.85) 60%), #06090c;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
   color: #e6eef0;
 
   &::before {

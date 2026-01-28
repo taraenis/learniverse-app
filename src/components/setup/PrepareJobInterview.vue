@@ -1,27 +1,11 @@
-<script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-import { usePrepareJobInterview } from '@/composables/usePrepareJobInterview';
-
-const { t } = useI18n();
-const emit = defineEmits<{
-  (e: 'onGenerateInterviewScenarios', url: string): void;
-}>();
-
-const { jobLinkURL, errorMessage, onGenerate } = usePrepareJobInterview();
-
-const handleSubmit = () => {
-  if (onGenerate()) {
-    emit('onGenerateInterviewScenarios', jobLinkURL.value);
-  }
-};
-</script>
-
 <template>
   <div class="prepare-interview-container">
-    <h1>{{ t('setup.prepareForInterview') }}</h1>
-    <h2>{{ t('setup.pasteJobDescription') }}</h2>
+    <div class="heading">
+      <h1>{{ t('setup.prepareForInterview') }}</h1>
+      <h2>{{ t('setup.pasteJobDescription') }}</h2>
+    </div>
 
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="onSubmit">
       <div v-if="errorMessage" class="error">
         <div class="error-message">{{ errorMessage }}</div>
       </div>
@@ -44,14 +28,37 @@ const handleSubmit = () => {
   </div>
 </template>
 
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+import { usePrepareJobInterview } from '@/composables/usePrepareJobInterview';
+
+interface PrepareJobInterview {
+  (e: 'onGenerateInterviewScenarios', url: string): void;
+}
+
+const { t } = useI18n();
+const emit = defineEmits<PrepareJobInterview>();
+
+const { jobLinkURL, errorMessage, onGenerate } = usePrepareJobInterview();
+
+const onSubmit = () => {
+  if (onGenerate()) {
+    emit('onGenerateInterviewScenarios', jobLinkURL.value);
+  }
+};
+</script>
+
 <style scoped lang="scss">
 .prepare-interview-container {
-  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
   h1 {
     color: #031a1b;
     font-weight: 500;
-    font-size: 2rem;
+    font-size: 3rem;
+    margin: 0 auto;
   }
 
   h2 {
@@ -80,8 +87,9 @@ const handleSubmit = () => {
     }
 
     label {
-      font-weight: 600;
+      font-weight: 500;
       color: #3d4350;
+      margin-bottom: 0.5rem;
     }
 
     .job-link-input {

@@ -36,11 +36,11 @@ const onGenerateInterviewScenarios = () => {
   display: flex;
   color: #000000;
   background-color: #ffffff;
+  min-height: 100vh;
 
   .sidebar-width {
     width: 30%;
     background-color: #f9f9f9;
-    height: 100%;
   }
 
   .content-area {
