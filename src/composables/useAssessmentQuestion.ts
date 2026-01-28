@@ -14,7 +14,7 @@ export function useAssessmentQuestion() {
 
     const savedAnswer = store.answers.get(question.id);
 
-    if (savedAnswer !== undefined) {
+    if (savedAnswer) {
       currentAnswer.value = savedAnswer;
     } else if (question.sampleAnswer) {
       currentAnswer.value = question.sampleAnswer;
@@ -32,7 +32,6 @@ export function useAssessmentQuestion() {
     { immediate: true },
   );
 
-  // Update store whenever the user types
   watch(currentAnswer, (newValue) => {
     const question = currentQuestion.value;
     if (question) {
