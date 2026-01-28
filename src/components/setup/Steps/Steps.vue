@@ -1,6 +1,11 @@
 <template>
   <div class="steps">
-    <StepItem v-for="(step, index) in steps" :key="index" :step="step" />
+    <StepItem
+      v-for="(step, index) in steps"
+      :key="index"
+      :title="step.title"
+      :description="step.description"
+    />
   </div>
 </template>
 
