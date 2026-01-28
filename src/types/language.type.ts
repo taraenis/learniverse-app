@@ -1,4 +1,4 @@
-import type { SUPPORTED_LANGS } from '@/constants';
+import type { SUPPORTED_LANGUAGES } from '@/language';
 
-export type Language = (typeof SUPPORTED_LANGS)[number];
+export type Language = (typeof SUPPORTED_LANGUAGES)[number];
 export type SupportedLocales = 'en' | 'de';

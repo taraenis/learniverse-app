@@ -19,9 +19,6 @@ async function loadLocaleMessages(locale: SupportedLocales) {
 
 export async function setLocale(locale: SupportedLocales) {
   await loadLocaleMessages(locale);
-
   i18n.global.locale.value = locale;
-  document.documentElement.lang = locale;
-
   return nextTick();
 }
