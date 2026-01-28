@@ -48,7 +48,7 @@ const onGenerateInterviewScenarios = () => {
     padding: 100px 60px;
   }
 
-  @media (max-width: $tablet) {
+  @media (max-width: $laptop) {
     .sidebar-width {
       width: 50%;
       min-width: 220px;
@@ -62,7 +62,7 @@ const onGenerateInterviewScenarios = () => {
     @include job-link-input-style;
   }
 
-  @media (max-width: $mobile) {
+  @media (max-width: $tablet) {
     flex-direction: column;
 
     .sidebar-width {
@@ -79,7 +79,7 @@ const onGenerateInterviewScenarios = () => {
     @include job-link-input-style;
   }
 
-  @media (max-width: $small-mobile) {
+  @media (max-width: $mobile) {
     .sidebar-width {
       height: auto;
     }
